@@ -1,0 +1,20 @@
+D_CODOBSVP;N;10;Cod_Obs Defecto para las VP
+D_CODRESVP;N;37;Cod_Res Defecto para las VP
+M_CODBARRIO;N;317;PROX BARRIO
+M_CODCALLE;N;1068;PROX CALLE
+M_CODCOEF;N;1356;Proximo Nro de Coeficiente
+M_CODDEST;N;55;Prox codigo de destino (SVP)
+M_CODDPTO;N;122;PROX DEPTO
+M_CODFOR;N;1546;Proximo Nro de Formula
+M_CODINFRA;N;57;Prox Cod Infraccion
+M_CODOBS;N;5;Prox Cod  de Observacion
+M_CODRES;N;103;Prox Codigo de Resumen
+M_CODSUP;N;17;Prox Cod de Superficies (SVP)
+M_CODTABLA;N;19;Proximo Codigo de Tabla
+M_CODUSU;N;2;Prox Nro de Usuario
+M_NROGRUPO;N;6765;Proximo Nro de Grupo
+M_NROINT;N;71720;Proximo Nro Interno de Documeo
+M_NROLIQ;N;13578;Prox Nro de Liquidacion
+M_NROPASE;N;443906;Proximo Nro de PASE
+M_NROVP;N;6941;Prox Nro de Sol de Vis. Previa
+M_TIPDOC;N;24;Pox Tipo de Docuemnto

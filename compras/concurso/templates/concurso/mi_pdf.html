@@ -1,0 +1,149 @@
+
+<html>
+<head>
+	
+	 <link rel="stylesheet" href="style.css" media="all" />
+         <title>Title</title>
+         <style type="text/css">
+             body {
+                 font-weight: 200;
+                 font-size: 14px;
+             }
+             .header {
+                 font-size: 20px;
+                 font-weight: 100;
+                 text-align: center;
+                 color: #007cae;
+             }
+             .title {
+                 font-size: 22px;
+                 font-weight: 100;
+                /* text-align: right;*/
+                padding: 10px 20px 0px 20px;  
+             }
+             .title span {
+                 color: #007cae;
+             }
+             .details {
+                 padding: 10px 20px 0px 20px;
+                 text-align: left !important;
+                 /*margin-left: 40%;*/
+             }
+             .hrItem {
+                 border: none;
+                 height: 1px;
+                 /* Set the hr color */
+                 color: #333; /* old IE */
+                 background-color: #fff; /* Modern Browsers */
+             }
+         
+         </style>
+     </head>
+   <body>
+   	
+   	<div class='wrapper'>
+             <div class='header'>
+
+                 <p class='title'>Compras y Licitaciones </p>
+             </div>
+         <div>
+         
+	<div class="modal-body">
+                        <div class="row">
+                                <div class="col-lg-12">
+                                        <strong>Titulo:</strong>
+                                        {{ datos.titulo |safe }}
+                                         
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-12">
+                                 <strong>Descripcion:</strong>
+                                        {{ datos.descripcion |safe }}
+                                 </div>
+
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-4">
+                                        <strong>Tipo:</strong>
+                                        {{ datos.tipo.nombre}}       
+                                </div>
+                                <br>
+                                <div class="col-lg-4">
+                                        <strong>Numero:</strong>
+                                        {{ datos.num }}       
+                                </div>
+                                <br>
+                                <div class="col-lg-4">
+                                        <strong>Expediente:</strong>
+                                        {{ datos.expte}}     
+                                </div>
+                                <br>
+
+
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-12">
+                                 <strong>Area:</strong>
+                                        {{ datos.id_area.nom_area }}
+                                 </div>
+                                 <br>
+
+                        </div>
+                         <div class="row">
+                                <div class="col-lg-4">
+                                        <strong>Rubro:</strong>
+                                        {{ datos.id_rubro.nombre}}       
+                                </div>
+                                <br>
+                                <div class="col-lg-4">
+                                        <strong>Subrubro:</strong>
+                                        {{ datos.id_subrubro.nombre }}       
+                                </div>
+                                <br>
+                                <div class="col-lg-4">
+                                        <strong>Item:</strong>
+                                        {{ datos.subrubron1.subrubron1}}     
+                                </div>
+                                <br>
+
+
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-4">
+                                        <strong>Vigencia:</strong>
+                                        {{ datos.fecha_cad}}       
+                                </div>
+                                <br>
+                                <div class="col-lg-4">
+                                        <strong>Hora:</strong>
+                                        {{ datos.hora_apertura }}       
+                                </div>
+                                <br>
+                                <div class="col-lg-4">
+                                        <strong>Estado:</strong>
+                                        {{ datos.estado.nombre}}     
+                                </div>
+                                <br>
+
+
+                        </div>
+                        <div class="row">
+                                <div class="col-lg-12">
+                                        <strong>Lugar de Apertura:</strong>
+                                        {{ datos.lugar_apertura |safe }}
+                                        
+                                              
+                                </div>
+                        </div>
+                        
+
+
+                </div>
+
+
+		
+
+</ul>
+  </body>
+</html>

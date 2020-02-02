@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h3>¿ Eliminar el registro de {{ object }}?</h3>
+
+    <button type="submit">Eliminar</button>
+    <a href="{% url 'concurso:concursos_listar' %}"> Cancelar</a>
+</form>
+{% endblock %}

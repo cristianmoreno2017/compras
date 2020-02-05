@@ -7,30 +7,45 @@ from base64 import b64decode
 import urllib.parse
 from urllib.parse import unquote
 from django.utils.html import mark_safe
+from django.utils import timezone
+from django.utils.html import format_html
 from django.contrib.admin import DateFieldListFilter
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 from . import models
 
 class ConcursosAdmin(admin.ModelAdmin):
-    list_display = ('titulo','descripcion','expte','fecha_pub','fecha_cad','id_rubro','tipo')
+    list_display = ('titulo_link','descripcion','expte','fecha_pub','fecha_cad','id_rubro','tipo')
+    list_display_links = None
     search_fields = ('titulo','descripcion','id_rubro__nombre','tipo__nombre','expte')
     list_per_page = 10
     list_filter = (
         ('fecha_pub', DateFieldListFilter),('fecha_cad', DateFieldListFilter),'id_rubro','tipo',
     )
+    editable_objs = []
+
     def get_actions(self, request):
         actions = super(ConcursosAdmin, self).get_actions(request) 
         del actions['delete_selected']
         return actions
+    
+    def titulo_link(self, obj):
+        if obj in self.editable_objs:
+            return format_html("<a href='{id}'>{titulo}</a>", id=obj.pk, titulo=obj.titulo)
+        else:
+            return format_html("{titulo}", id=obj.pk, titulo=obj.titulo)
+
     def get_queryset(self,request):
         q= super().get_queryset(self)
+        self.editable_objs = q.filter(fecha_cad__gt=timezone.now())
         return q.filter(is_delete=False)
+    
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'id_area':
             kwargs['queryset'] = models.Areas.objects.filter(listar=1).order_by('nom_area')
         return super(ConcursosAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
-
+    
+    
 class ConcuAdmin(admin.ModelAdmin):
     list_display = ('titulo','descripcion','expte','fecha_pub','fecha_cad','expte','id_rubro','tipo')
     search_fields = ('titulo','descripcion','id_rubro__nombre','tipo__nombre','expte')

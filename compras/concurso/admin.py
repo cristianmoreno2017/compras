@@ -15,9 +15,9 @@ from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from . import models
 
 class ConcursosAdmin(admin.ModelAdmin):
-    list_display = ('titulo_link','descripcion','expte','fecha_pub','fecha_cad','id_rubro','tipo')
+    list_display = ('titulo_link','descripcion','expte','fecha_pub','fecha_cad','id_rubro','tipo','lugar_apertura','id_area','nom_archivo','id_subrubro','subrubron1','num')
     list_display_links = None
-    search_fields = ('titulo','descripcion','id_rubro__nombre','tipo__nombre','expte')
+    search_fields = ('titulo','descripcion','id_rubro__nombre','tipo__nombre','expte','lugar_apertura')
     list_per_page = 10
     list_filter = (
         ('fecha_pub', DateFieldListFilter),('fecha_cad', DateFieldListFilter),'id_rubro','tipo',
@@ -47,18 +47,29 @@ class ConcursosAdmin(admin.ModelAdmin):
     
     
 class ConcuAdmin(admin.ModelAdmin):
-    list_display = ('titulo','descripcion','expte','fecha_pub','fecha_cad','expte','id_rubro','tipo')
-    search_fields = ('titulo','descripcion','id_rubro__nombre','tipo__nombre','expte')
+    list_display = ('titulo_link','descripcion','expte','fecha_pub','fecha_cad','id_rubro','tipo','lugar_apertura','id_area','nom_archivo','id_subrubro','subrubron1','num')
+    list_display_links = None
+    search_fields = ('titulo','descripcion','id_rubro__nombre','tipo__nombre','expte','lugar_apertura')
     list_per_page = 10
     list_filter = (
         ('fecha_pub', DateFieldListFilter),('fecha_cad', DateFieldListFilter),'id_rubro','tipo',
     )
+    editable_objs = []
+
     def get_actions(self, request):
         actions = super(ConcuAdmin, self).get_actions(request) 
         del actions['delete_selected']
         return actions
+
+    def titulo_link(self, obj):
+        if obj in self.editable_objs:
+            return format_html("<a href='{id}'>{titulo}</a>", id=obj.pk, titulo=obj.titulo)
+        else:
+            return format_html("{titulo}", id=obj.pk, titulo=obj.titulo)
+
     def get_queryset(self,request):
         q= super().get_queryset(self)
+        self.editable_objs = q.filter(fecha_cad__gt=timezone.now())
         return q.filter(is_delete=False).filter(visible=True)
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == 'id_area':
